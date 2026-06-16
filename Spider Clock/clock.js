@@ -1,7 +1,7 @@
 let select = e => document.querySelector(e);
 let selectAll = e => document.querySelectorAll(e);
 
-let currentTimezone = 'Asia/Kolkata'; // Default timezone
+let currentTimezone = 'Asia/Tokyo'; // Default timezone
 
 // Helper function to get hours, minutes, and seconds based on a specific timezone
 function getTzTime(tz) {
@@ -51,15 +51,15 @@ function startAnimation() {
 	setTimeMinHr();
 	gsap.set([".gsapWrapper", ".vline"], { autoAlpha: 1, });
 
-	gsap.to(".cw.t24", 1, { rotation: "+=15", transformOrigin: "50% 50%", ease: "bounce", onComplete: function () { this.invalidate().delay(1).restart(true); } });
-	gsap.to(".cw.t20", 1, { rotation: "+=18", transformOrigin: "50% 50%", ease: "bounce", onComplete: function () { this.invalidate().delay(1).restart(true); } });
+	gsap.to(".cw.t24", 1, { rotation: "-=15", transformOrigin: "50% 50%", ease: "bounce", onComplete: function () { this.invalidate().delay(1).restart(true); } });
+	gsap.to(".cw.t20", 1, { rotation: "-=18", transformOrigin: "50% 50%", ease: "bounce", onComplete: function () { this.invalidate().delay(1).restart(true); } });
 	gsap.to(".ccw.t12", 1, { rotation: "-=30", transformOrigin: "50% 50%", ease: "bounce", onComplete: function () { this.invalidate().delay(1).restart(true); } });
 	gsap.to(min, 0.5, {
 		rotation: getMinRotation, transformOrigin: "50% 50%", ease: "none", onComplete: function () {
 
 			if (Math.abs(gsap.getProperty(min, "rotation")) >= 360)
 				gsap.set(min, { rotation: 0, transformOrigin: "50% 50%" });
-			this.invalidate().delay(5).restart(true);
+			this.invalidate().delay(0).restart(true);
 
 		}
 	});
@@ -69,7 +69,7 @@ function startAnimation() {
 
 			if (Math.abs(gsap.getProperty(hr, "rotation")) >= 360)
 				gsap.set(hr, { rotation: 0, transformOrigin: "50% 50%" });
-			this.invalidate().delay(5).restart(true);
+			this.invalidate().delay(0).restart(true);
 
 		}
 	});
@@ -164,7 +164,7 @@ function startAnimation() {
 	function geSecRotation() {
 
 		let time = getTzTime(currentTimezone);
-		let rotation = -(time.seconds * 6);
+		let rotation = time.seconds * 6;
 		let scaleXSec = gsap.getProperty(sec, "scaleX");
 
 		let difference = Math.abs(gsap.getProperty(sec, "rotation") - rotation);
@@ -183,7 +183,7 @@ function startAnimation() {
 	function getMinRotation() {
 
 		let time = getTzTime(currentTimezone);
-		let rotation = -(time.minutes * 6 + time.seconds * 6 / 59);
+		let rotation = time.minutes * 6 + (time.seconds * 6 / 60);
 		let scaleXMin = gsap.getProperty(min, "scaleX");
 
 		let difference = Math.abs(gsap.getProperty(min, "rotation") - rotation);
@@ -203,7 +203,7 @@ function startAnimation() {
 	function getHrRotation() {
 
 		let time = getTzTime(currentTimezone);
-		let rotation = -((time.hours % 12) * 30 + time.minutes * 0.5);
+		let rotation = (time.hours % 12) * 30 + time.minutes * 0.5;
 		let scaleHr = gsap.getProperty(hr, "scaleX");
 
 		let difference = Math.abs(gsap.getProperty(hr, "rotation") - rotation);
