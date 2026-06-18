@@ -276,6 +276,7 @@
     .contact-form {
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 32px;
+      flex: 1; max-width: 450px; margin-top: 45px; margin-left: auto;
     }
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 7px; text-transform: uppercase; letter-spacing: .05em; }
@@ -310,6 +311,11 @@
       .nav-links { display: none; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-stats { gap: 24px; }
+      .contact-form {
+        margin-top: 80px; /* Pushes the form down on phones */
+        max-width: 100%; /* Makes the form take full width on smaller screens */
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -451,7 +457,7 @@
           <span class="tag" style="color: green;">AI</span>
         </div>
         <div class="project-links">
-            <button class="proj-btn primary" onclick="window.open('Spider%20Clock/index.html', '_blank')">Open</button>
+                <button class="proj-btn primary" onclick="window.open('Spider%20Clock/Clock.html', '_blank')">Open</button>
         </div>
       </div>
     </div> 
@@ -507,7 +513,7 @@
             <div class="contact-label">Open To</div>
             
             <div class="image-container" style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-              <img src="Images/Github.png" alt="GitHub" style="width: 1.2em; height: 1.2em; object-fit: contain; vertical-align: middle;" />
+              <img src="Images/github.png" alt="GitHub" style="width: 1.2em; height: 1.2em; object-fit: contain; vertical-align: middle;" />
               <a href="https://github.com/dev183636" target="_blank" style="text-decoration: none; color: #87CEEB;">GitHub</a>
             </div>
             
@@ -520,7 +526,7 @@
            </div>
         </div>
        </div>
-    <div class="contact-form" style="flex: 1; max-width: 450px; margin-top: 45px; margin-left: auto;">
+    <div class="contact-form">
       <form id="contact-form">
         
         <div class="form-group" style="margin-bottom: 15px;">

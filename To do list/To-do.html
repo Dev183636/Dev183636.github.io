@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="To-do.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Just Do It - Smart Task Manager</title>
   <style>
@@ -36,7 +40,7 @@
 
     .app-wrapper {
       display: grid;
-      grid-template-columns: 280px 1fr 360px;
+      grid-template-columns: 280px 1fr;
       min-height: 100vh;
     }
 
@@ -254,69 +258,6 @@
     .empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: .5; }
     .empty-state h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
 
-    /* DETAIL PANEL */
-    .detail-panel {
-      background: var(--card); border-left: 1px solid var(--border);
-      display: flex; flex-direction: column; height: 100vh;
-      position: sticky; top: 0; overflow-y: auto;
-    }
-
-    .detail-header {
-      padding: 16px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-
-    .detail-header h3 { font-size: 16px; font-weight: 600; }
-
-    .detail-content { flex: 1; padding: 16px; overflow-y: auto; }
-
-    .detail-empty { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-    .detail-empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .5; }
-
-    .detail-task { display: flex; flex-direction: column; gap: 20px; }
-
-    .detail-title { font-size: 18px; font-weight: 600; word-break: break-word; }
-
-    .detail-checkbox {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px; background: var(--bg); border-radius: var(--radius); margin-bottom: 4px;
-    }
-
-    .detail-checkbox input { width: 24px; height: 24px; cursor: pointer; accent-color: var(--success); }
-    .detail-checkbox label { font-size: 14px; cursor: pointer; font-weight: 500; }
-
-    .detail-section { display: flex; flex-direction: column; gap: 12px; }
-
-    .detail-section-title {
-      font-size: 12px; font-weight: 700; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: .08em;
-    }
-
-    .detail-field {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 12px; background: var(--bg); border-radius: var(--radius);
-    }
-
-    .detail-field-label { font-size: 13px; font-weight: 500; }
-    .detail-field-value { font-size: 13px; color: var(--text-secondary); }
-
-    .detail-actions { display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
-
-    .btn-edit {
-      flex: 1; padding: 10px; background: var(--accent); color: white;
-      border: none; border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: all .2s;
-    }
-
-    .btn-edit:hover { background: #3a7af0; }
-
-    .btn-delete-detail {
-      flex: 1; padding: 10px; background: rgba(248,113,113,.15); color: var(--danger);
-      border: 1px solid rgba(248,113,113,.3); border-radius: var(--radius);
-      cursor: pointer; font-weight: 600; transition: all .2s;
-    }
-
-    .btn-delete-detail:hover { background: rgba(248,113,113,.25); }
-
     /* MODAL */
     .modal {
       display: none; position: fixed; inset: 0;
@@ -379,7 +320,7 @@
       border: none; border-radius: var(--radius); cursor: pointer; font-weight: 600; transition: all .2s;
     }
 
-    .btn-submit:hover { background: #3a7af0; }
+    .btn-submit:hover { background: #1771bb; }
 
     .btn-cancel {
       flex: 1; padding: 12px; background: var(--bg); color: var(--text);
@@ -444,7 +385,6 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .app-wrapper { grid-template-columns: 240px 1fr; }
-      .detail-panel { display: none; }
     }
 
     @media (max-width: 768px) {
@@ -455,7 +395,6 @@
         transform: translateX(-100%); transition: transform .3s;
       }
       .sidebar.open { transform: translateX(0); }
-      .detail-panel { display: none; }
       .main-area { height: auto; min-height: 100vh; }
 
       body { font-size: 15px; }
@@ -490,22 +429,9 @@
       .modal-header h2 { font-size: 17px; }
       .form-group input, .form-group select, .form-group textarea { padding: 12px; font-size: 16px; min-height: 44px; }
       .form-group textarea { min-height: 80px; }
-      .btn-submit, .btn-cancel, .btn-edit, .btn-delete-detail { min-height: 48px; padding: 12px; font-size: 15px; }
+      .btn-submit, .btn-cancel { min-height: 48px; padding: 12px; font-size: 15px; }
       .data-btn { min-height: 48px; }
       .toast { bottom: 16px; left: 16px; right: 16px; transform: none; text-align: center; }
-      .detail-panel.mobile-open {
-        display: flex; position: fixed; left: 0; right: 0; bottom: 0;
-        height: 75vh; z-index: 1500; border-left: none;
-        border-top-left-radius: 16px; border-top-right-radius: 16px;
-        box-shadow: 0 -10px 30px rgba(0,0,0,.5);
-        animation: slideUp .25s ease-out;
-      }
-      .detail-panel.mobile-open::before {
-        content: ''; display: block; width: 40px; height: 4px;
-        background: var(--border); border-radius: 2px;
-        margin: 8px auto 0;
-      }
-      @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
     }
 
     @media (min-width: 769px) { .btn-hamburger { display: none; } }
@@ -531,64 +457,68 @@
 
     <div class="sidebar-content">
       <div class="sidebar-section">
-        <button class="nav-item active" data-view="today" onclick="switchView(this)">
+        <button class="Nbutton" data-view="today" onclick="switchView(this)">
           <span class="nav-item-icon">📅</span>
           <span class="nav-label">Today</span>
-          <span class="nav-item-count" id="count-today">0</span>
+     
         </button>
-        <button class="nav-item" data-view="tomorrow" onclick="switchView(this)">
+        <button class="Nbutton" data-view="tomorrow" onclick="switchView(this)">
           <span class="nav-item-icon">⭐</span>
           <span class="nav-label">Tomorrow</span>
-          <span class="nav-item-count" id="count-tomorrow">0</span>
+          
         </button>
-        <button class="nav-item" data-view="week" onclick="switchView(this)">
+        <button class="Nbutton" data-view="week" onclick="switchView(this)">
           <span class="nav-item-icon">📆</span>
           <span class="nav-label">This Week</span>
-          <span class="nav-item-count" id="count-week">0</span>
+          
         </button>
-        <button class="nav-item" data-view="all" onclick="switchView(this)">
+        <button class="Nbutton" data-view="all" onclick="switchView(this)">
           <span class="nav-item-icon">📋</span>
           <span class="nav-label">All Tasks</span>
-          <span class="nav-item-count" id="count-all">0</span>
+          
         </button>
       </div>
 
       <div class="sidebar-section">
         <div class="sidebar-section-title">My Lists</div>
-        <button class="nav-item" data-view="list-inbox" onclick="switchView(this)">
+        <button class="Nbutton" data-view="list-inbox" onclick="switchView(this)">
           <span class="nav-item-icon">📬</span>
           <span class="nav-label">Inbox</span>
-          <span class="nav-item-count" id="count-inbox">0</span>
+        
         </button>
-        <button class="nav-item" data-view="list-work" onclick="switchView(this)">
+        <button class="Nbutton" data-view="list-work" onclick="switchView(this)">
           <span class="nav-item-icon">💼</span>
           <span class="nav-label">Work</span>
-          <span class="nav-item-count" id="count-work">0</span>
+        
         </button>
-        <button class="nav-item" data-view="list-personal" onclick="switchView(this)">
+        <button class="Nbutton" data-view="list-personal" onclick="switchView(this)">
           <span class="nav-item-icon">🎯</span>
           <span class="nav-label">Personal</span>
-          <span class="nav-item-count" id="count-personal">0</span>
+          
         </button>
-        <button class="nav-item" data-view="list-shopping" onclick="switchView(this)">
+        <button class="Nbutton" data-view="list-shopping" onclick="switchView(this)">
           <span class="nav-item-icon">🛒</span>
           <span class="nav-label">Shopping</span>
-          <span class="nav-item-count" id="count-shopping">0</span>
+      
         </button>
       </div>
 
       <div class="sidebar-section">
-        <button class="nav-item" data-view="completed" onclick="switchView(this)">
+        <button class="Nbutton" data-view="completed" onclick="switchView(this)">
           <span class="nav-item-icon">✅</span>
           <span class="nav-label">Completed</span>
-          <span class="nav-item-count" id="count-completed">0</span>
+     
         </button>
       </div>
     </div>
 
     <div class="sidebar-footer">
         
-      <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+      <!-- From Uiverse.io by andrew-demchenk0 --> 
+      <button class="button" onclick="openSettings()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20" fill="none" class="svg-icon"><g stroke-width="1.5" stroke-linecap="round" stroke="#4f8ef7"><circle r="2.5" cy="10" cx="10"></circle><path fill-rule="evenodd" d="m8.39079 2.80235c.53842-1.51424 2.67991-1.51424 3.21831-.00001.3392.95358 1.4284 1.40477 2.3425.97027 1.4514-.68995 2.9657.82427 2.2758 2.27575-.4345.91407.0166 2.00334.9702 2.34248 1.5143.53842 1.5143 2.67996 0 3.21836-.9536.3391-1.4047 1.4284-.9702 2.3425.6899 1.4514-.8244 2.9656-2.2758 2.2757-.9141-.4345-2.0033.0167-2.3425.9703-.5384 1.5142-2.67989 1.5142-3.21831 0-.33914-.9536-1.4284-1.4048-2.34247-.9703-1.45148.6899-2.96571-.8243-2.27575-2.2757.43449-.9141-.01669-2.0034-.97028-2.3425-1.51422-.5384-1.51422-2.67994.00001-3.21836.95358-.33914 1.40476-1.42841.97027-2.34248-.68996-1.45148.82427-2.9657 2.27575-2.27575.91407.4345 2.00333-.01669 2.34247-.97026z" clip-rule="evenodd"></path></g></svg>
+  <span class="lable">Settings</span>
+ </button>
     </div>
   </aside>
 
@@ -601,27 +531,16 @@
         <span class="count" id="headerCount">0</span>
       </div>
       <div class="header-actions">
-        <button class="btn-add-task" onclick="openAddModal()"><span class="btn-text">+ Add Task</span></button>
+        <button class="Btn" onclick="openAddModal()">Add Task 
+          <svg class="svg" viewBox="0 0 512 512">
+            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path></svg>
+        </button>
       </div>
     </header>
 
     <div class="main-content">
       <div class="tasks-container" id="main-tasks"></div>
     </div>
-  </div>
-
-  <!-- DETAIL PANEL -->
-  <aside class="detail-panel">
-    <div class="detail-header">
-      <h3>Task Details</h3>
-    </div>
-    <div class="detail-content" id="detailContent">
-      <div class="detail-empty">
-        <div class="detail-empty-icon">📋</div>
-        <p>Select a task to view details</p>
-      </div>
-    </div>
-  </aside>
 </div>
 
 <!-- ADD/EDIT MODAL -->
@@ -687,17 +606,41 @@
       <h3>Display</h3>
       <div class="setting-item">
         <div class="setting-item-label">
-          <div class="setting-item-title">Show Completed Tasks</div>
-          <div class="setting-item-desc">Display tasks you've already completed</div>
-        </div>
-        <div class="toggle-switch on" id="toggle-showCompleted" onclick="toggleSetting('showCompleted')"></div>
-      </div>
-      <div class="setting-item">
-        <div class="setting-item-label">
           <div class="setting-item-title">Show Task Descriptions</div>
           <div class="setting-item-desc">Display descriptions in the task list</div>
         </div>
-        <div class="toggle-switch" id="toggle-showDescriptions" onclick="toggleSetting('showDescriptions')"></div>
+        <!-- Checkbox --> 
+        <label class="neon-checkbox">
+          <input type="checkbox" id="toggle-showDescriptions" onchange="toggleSetting('showDescriptions')" />
+          <div class="neon-checkbox__frame">
+            <div class="neon-checkbox__box">
+              <div class="neon-checkbox__check-container">
+                <svg viewBox="0 0 24 24" class="neon-checkbox__check">
+                  <path d="M3,12.5l7,7L21,5"></path>
+                </svg>
+              </div>
+              <div class="neon-checkbox__glow"></div>
+              <div class="neon-checkbox__borders">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="neon-checkbox__effects">
+              <div class="neon-checkbox__particles">
+                <span></span><span></span><span></span><span></span> <span></span
+                ><span></span><span></span><span></span> <span></span><span></span
+                ><span></span><span></span>
+              </div>
+              <div class="neon-checkbox__rings">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+              </div>
+              <div class="neon-checkbox__sparks">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </label>
       </div>
     </div>
 
@@ -719,9 +662,8 @@
 <script>
 // ── STATE ──────────────────────────────────────────────────
 let tasks    = JSON.parse(localStorage.getItem('jdi_tasks'))    || [];
-let settings = JSON.parse(localStorage.getItem('jdi_settings')) || { showCompleted: true, showDescriptions: false };
+let settings = JSON.parse(localStorage.getItem('jdi_settings')) || { showDescriptions: false };
 let currentView   = 'today';
-let selectedId    = null;
 let editingId     = null;
 let nextId        = Math.max(0, ...tasks.map(t => t.id || 0)) + 1;
 
@@ -802,12 +744,12 @@ const VIEW_LABELS = {
 // ── SWITCH VIEW ─────────────────────────────────────────────
 function switchView(btn) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.Nbutton').forEach(el => el.classList.remove('active'));
   btn.classList.add('active');
 
   currentView = btn.dataset.view;
   document.getElementById('headerTitle').textContent = VIEW_LABELS[currentView] || currentView;
 
-  closeDetail();
   renderMain();
   updateCounts();
   if (window.innerWidth <= 768) closeSidebar();
@@ -854,7 +796,7 @@ function taskHTML(task) {
     ? `<div style="font-size:12px;color:var(--text-muted);margin-top:3px;">${esc(task.description)}</div>` : '';
 
   return `
-    <div class="task-item${task.completed?' completed':''}" id="ti-${task.id}" onclick="selectTask(${task.id})">
+    <div class="task-item${task.completed?' completed':''}" id="ti-${task.id}">
       <input type="checkbox" class="task-checkbox"
         ${task.completed?'checked':''}
         onchange="toggleTask(${task.id})"
@@ -879,51 +821,6 @@ function priorityIcon(p) {
   return p==='high'?'🔴': p==='medium'?'🟡':'🟢';
 }
 
-// ── SELECT TASK (DETAIL PANEL) ──────────────────────────────
-function selectTask(id) {
-  selectedId = id;
-  const task = tasks.find(t => t.id === id);
-  if (!task) return;
-
-  document.getElementById('detailContent').innerHTML = `
-    <div class="detail-task">
-      <div class="detail-checkbox">
-        <input type="checkbox" id="dc-${id}" ${task.completed?'checked':''}
-          onchange="toggleTask(${id})" />
-        <label for="dc-${id}">${task.completed ? 'Completed' : 'Mark as complete'}</label>
-      </div>
-      <div class="detail-title">${esc(task.title)}</div>
-      ${task.description ? `<p style="color:var(--text-secondary);font-size:14px;line-height:1.6;">${esc(task.description)}</p>` : ''}
-      <div class="detail-section">
-        <div class="detail-section-title">Details</div>
-        ${task.dueDate ? `<div class="detail-field"><span class="detail-field-label">📅 Due Date</span><span class="detail-field-value">${formatDateFull(task.dueDate)}</span></div>` : ''}
-        ${task.time     ? `<div class="detail-field"><span class="detail-field-label">🕐 Time</span><span class="detail-field-value">${task.time}</span></div>` : ''}
-        ${task.priority ? `<div class="detail-field"><span class="detail-field-label">🔥 Priority</span><span class="detail-field-value" style="text-transform:capitalize;">${task.priority}</span></div>` : ''}
-        <div class="detail-field">
-          <span class="detail-field-label">📋 List</span>
-          <span class="detail-field-value" style="text-transform:capitalize;">${task.list || 'inbox'}</span>
-        </div>
-      </div>
-      <div class="detail-actions">
-        <button class="btn-edit" onclick="editTask(null,${id})">Edit</button>
-        <button class="btn-delete-detail" onclick="deleteTask(null,${id})">Delete</button>
-      </div>
-    </div>`;
-  if (window.innerWidth <= 768) {
-    document.querySelector('.detail-panel').classList.add('mobile-open');
-  }
-}
-
-function closeDetail() {
-  selectedId = null;
-  document.getElementById('detailContent').innerHTML = `
-    <div class="detail-empty">
-      <div class="detail-empty-icon">📋</div>
-      <p>Select a task to view details</p>
-    </div>`;
-  document.querySelector('.detail-panel').classList.remove('mobile-open');
-}
-
 // ── TOGGLE COMPLETE ─────────────────────────────────────────
 function toggleTask(id) {
   const task = tasks.find(t => t.id === id);
@@ -932,7 +829,6 @@ function toggleTask(id) {
   saveTasks();
   renderMain();
   updateCounts();
-  if (selectedId === id) selectTask(id);
   showToast(task.completed ? '✅ Task completed!' : '↩️ Task reopened');
 }
 
@@ -944,7 +840,6 @@ function deleteTask(e, id) {
   saveTasks();
   renderMain();
   updateCounts();
-  if (selectedId === id) closeDetail();
   showToast('🗑️ Task deleted');
 }
 
@@ -1015,12 +910,9 @@ function saveTask() {
     const idx = tasks.findIndex(t => t.id === editingId);
     if (idx !== -1) tasks[idx] = { ...tasks[idx], ...data };
     showToast('✏️ Task updated');
-    const sid = editingId;
     closeModal();
     renderMain();
     updateCounts();
-    // refresh detail panel if this task is selected
-    if (selectedId === sid) selectTask(sid);
   } else {
     tasks.unshift({ id: nextId++, completed: false, ...data });
     showToast('✅ Task added');
@@ -1037,7 +929,10 @@ function openSettings() {
   // sync toggles to current settings
   Object.keys(settings).forEach(key => {
     const el = document.getElementById('toggle-' + key);
-    if (el) el.className = 'toggle-switch' + (settings[key] ? ' on' : '');
+    if (el) {
+      if (el.type === 'checkbox') el.checked = settings[key];
+      else el.className = 'toggle-switch' + (settings[key] ? ' on' : '');
+    }
   });
   document.getElementById('settingsModal').classList.add('active');
 }
@@ -1049,7 +944,10 @@ function closeSettings() {
 function toggleSetting(key) {
   settings[key] = !settings[key];
   const el = document.getElementById('toggle-' + key);
-  if (el) el.className = 'toggle-switch' + (settings[key] ? ' on' : '');
+  if (el) {
+    if (el.type === 'checkbox') el.checked = settings[key];
+    else el.className = 'toggle-switch' + (settings[key] ? ' on' : '');
+  }
   localStorage.setItem('jdi_settings', JSON.stringify(settings));
   renderMain(); // re-render in case showDescriptions changed
 }
@@ -1073,7 +971,6 @@ function clearAllTasks() {
   if (!confirm('Delete ALL tasks permanently?')) return;
   tasks = [];
   saveTasks();
-  closeDetail();
   renderMain();
   updateCounts();
   closeSettings();

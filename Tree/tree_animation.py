@@ -6,7 +6,7 @@ screen = turtle.Screen()
 screen.bgcolor("black")
 
 tree = turtle.Turtle()
-tree.speed(0)
+tree.speed(100)
 tree.color("#937cbb")
 tree.left(90)
 tree.penup()
