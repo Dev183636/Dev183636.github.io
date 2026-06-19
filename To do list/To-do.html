@@ -329,67 +329,126 @@
       margin-top: 12px;
     }
 
-    /* AUTH SCREEN */
+    /* AUTH SCREEN (Uiverse nathann09 layout) */
     .auth-screen {
       position: fixed; inset: 0; z-index: 3000;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, #0a0a1a 0%, #000 50%, #1a0a2a 100%);
       padding: 20px;
+      overflow: auto;
     }
-    .auth-card {
-      background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      width: 100%; max-width: 420px;
-      box-shadow: 8px 8px 0 0 var(--border);
+    .auth-screen .form {
+      background-color: var(--card);
+      display: block;
+      padding: 1rem;
+      max-width: 350px;
+      width: 100%;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      color: var(--text);
     }
-    .auth-logo {
-      display: flex; align-items: center; gap: 10px;
-      justify-content: center; margin-bottom: 8px;
+    .auth-screen .form-title {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--text);
+      margin: 0 0 0.5rem;
     }
-    .auth-logo-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
+    .auth-screen .input-container {
+      position: relative;
     }
-    .auth-title {
-      font-size: 22px; font-weight: 700; text-align: center;
-      margin-bottom: 4px;
+    .auth-screen .input-container input,
+    .auth-screen .form button {
+      outline: none;
+      border: 1px solid var(--border);
+      margin: 8px 0;
+      font-family: inherit;
     }
-    .auth-sub {
-      font-size: 13px; color: var(--text-muted);
-      text-align: center; margin-bottom: 24px;
+    .auth-screen .input-container input {
+      background-color: var(--card);
+      color: var(--text);
+      padding: 1rem;
+      padding-right: 3rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
-    .auth-tabs {
-      display: flex; gap: 0; margin-bottom: 20px;
-      border: 2px solid var(--border); border-radius: 8px;
-      overflow: hidden;
+    .auth-screen .input-container input::placeholder {
+      color: var(--text-muted);
     }
-    .auth-tab {
-      flex: 1; padding: 10px;
-      background: transparent; color: var(--text-muted);
-      border: none; cursor: pointer;
-      font-family: inherit; font-size: 13px; font-weight: 600;
-      transition: all .2s;
+    .auth-screen .form-submit {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      background-color: var(--accent);
+      color: #ffffff;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      width: 100%;
+      border-radius: 0.5rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      transition: opacity 0.2s;
     }
-    .auth-tab.active {
-      background: var(--accent); color: #fff;
+    .auth-screen .form-submit:hover { opacity: 0.95; }
+    .auth-screen .form-link-row {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      text-align: center;
+      margin: 0.5rem 0 0;
     }
-    .auth-error {
-      color: var(--danger); font-size: 13px;
-      margin: -8px 0 12px; min-height: 18px;
+    .auth-screen .form-link-row a {
+      text-decoration: underline;
+      color: var(--accent);
+      cursor: pointer;
     }
-    .auth-switch {
-      text-align: center; font-size: 13px;
-      color: var(--text-muted); margin-top: 16px;
+    .auth-screen .auth-error {
+      color: var(--danger); font-size: 13px; min-height: 18px;
+      text-align: center; margin: 4px 0 0;
     }
-    .auth-switch a {
-      color: var(--accent); cursor: pointer;
-      text-decoration: none; font-weight: 600;
+    .auth-screen .auth-stack {
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+      width: 100%; max-width: 350px;
     }
-    .auth-switch a:hover { text-decoration: underline; }
+    .auth-screen .goback-btn {
+          background-color: var(--card); color: var(--text);
+          text-align: center; width: 192px; border-radius: 16px;
+          height: 52px; position: relative; font-size: 16px;
+          font-weight: 600; border: 1px solid var(--border);
+          cursor: pointer; overflow: hidden; padding: 0;
+          font-family: inherit; transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        .auth-screen .goback-arrow {
+          background-color: var(--accent); color: #0b0b0b;
+          border-radius: 14px; height: 44px; width: 25%;
+          display: flex; align-items: center; justify-content: center;
+          position: absolute; left: 4px; top: 4px; z-index: 10;
+          transition: width 0.5s ease;
+        }
+        .auth-screen .goback-arrow svg { width: 22px; height: 22px; }
+        .auth-screen .goback-text {
+          margin: 0; transform: translateX(8px);
+          transition: transform 0.5s ease, opacity 0.5s ease;
+          color: var(--text);
+        }
+        .auth-screen .goback-btn:hover {
+          background-color: var(--accent); color: #ffffff;
+        }
+        .auth-screen .goback-btn:hover .goback-arrow {
+          width: 184px; background-color: rgba(255,255,255,0.18); color: #ffffff;
+        }
+        .auth-screen .goback-btn:hover .goback-arrow svg path { fill: #ffffff; }
+        .auth-screen .goback-btn:hover .goback-text {
+          transform: translateX(0); color: #ffffff;
+        }
+        body[data-theme="light"] .auth-screen .goback-btn { background-color: #ffffff; color: #111827; }
+        body[data-theme="light"] .auth-screen .goback-btn:hover { background-color: var(--accent); color: #ffffff; }
 
     .user-chip {
       display: flex; align-items: center; gap: 8px;
@@ -439,6 +498,7 @@
     .modal-close:hover { color: var(--text); }
 
     .form-group { margin-bottom: 16px; }
+    .form-group-spaced { margin-top: 26px; }
 
     .form-group label {
       display: block; font-size: 13px; font-weight: 600;
@@ -483,7 +543,50 @@
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+        /* Floating-label neobrut input (Uiverse catraco style) */
+        .input-container {
+          position: relative;
+          width: 100%;
+                  margin-top: 10px;
+                }
+                .neobrut-input {
+                  width: 100%;
+                  padding: 16px 14px;
+                  border-radius: 8px;
+                  border: 2px solid var(--border);
+                  background-color: transparent;
+                  color: var(--text);
+                  font-family: inherit; font-size: 15px; font-weight: 600;
+                  outline: none; opacity: 0.85;
+                  box-shadow: 4px 4px 0 0 var(--border);
+                  transition: opacity .2s ease-in-out, box-shadow .2s ease-in-out, transform .15s, border-color .2s;
+                }
+                .neobrut-input:hover { opacity: 1; }
+                .neobrut-input:focus { opacity: 1; border-color: var(--accent); box-shadow: 4px 4px 0 0 var(--accent); transform: translate(-1px, -1px); }
+                .neobrut-textarea { resize: vertical; min-height: 90px; }
+
+                .input-label {
+                  position: absolute;
+                  top: -10px; left: 12px;
+                  padding: 2px 8px;
+                  background-color: var(--card);
+                  color: var(--text);
+                  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+                  text-transform: uppercase;
+                  border-radius: 6px;
+                  border: 2px solid var(--border);
+                  pointer-events: none;
+                  opacity: 0.7;
+                  transition: opacity .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+                }
+                .neobrut-input:focus + .input-label,
+                .neobrut-input:not(:placeholder-shown) + .input-label {
+                  opacity: 1;
+                  color: var(--accent);
+                  border-color: var(--accent);
+                }
+                .input-label-textarea { top: -10px; }
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
 
     .btn-submit {
       flex: 1; padding: 12px; background: var(--accent); color: white;
@@ -772,6 +875,125 @@
             0 0 100px #00d97e;
         }
 
+                /* LOGOUT ROUND BUTTON (themed) */
+                .logout-wrap {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 14px;
+                  margin: 6px 0 4px;
+                }
+                .Btn {
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
+                  width: 65px;
+                  height: 65px;
+                  border: 1px solid var(--border);
+                  border-radius: 50%;
+                  cursor: pointer;
+                  position: relative;
+                  overflow: hidden;
+                  transition-duration: 0.3s;
+                  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+                  background-color: var(--card);
+                  color: var(--text);
+                  padding: 0;
+                }
+                .Btn .sign {
+                  width: 100%;
+                  transition-duration: 0.3s;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+                .Btn .sign svg { width: 26px; height: 26px; }
+                .Btn .sign svg path { fill: var(--text); transition: fill 0.3s; }
+                .Btn .text {
+                  position: absolute;
+                  right: 0%;
+                  width: 0%;
+                  opacity: 0;
+                  color: var(--card);
+                  font-size: 1.3em;
+                  font-weight: 700;
+                  letter-spacing: 0.02em;
+                  transition-duration: 0.3s;
+                  white-space: nowrap;
+                }
+                .Btn:hover {
+                  background-color: #d63b3b;
+                  border-color: #d63b3b;
+                  width: 190px;
+                  border-radius: 40px;
+                  transition-duration: 0.3s;
+                  box-shadow: 0 0 14px rgba(214, 59, 59, 0.45);
+                }
+                .Btn:hover .sign {
+                  width: 30%;
+                  transition-duration: 0.3s;
+                  padding-left: 22px;
+                }
+                .Btn:hover .sign svg path { fill: #ffffff; }
+                .Btn:hover .text {
+                  opacity: 1;
+                  width: 70%;
+                  transition-duration: 0.3s;
+                  padding-right: 14px;
+                }
+                .Btn:active { transform: translate(2px, 2px); }
+                body[data-theme="light"] .Btn { background-color: #f3f4f6; }
+                body[data-theme="light"] .Btn .sign svg path { fill: #111827; }
+                body[data-theme="light"] .Btn:hover .sign svg path { fill: #ffffff; }
+
+                /* SIGN IN ROUNDED BUTTON (themed) */
+                .user-profile {
+                  width: 160px;
+                  height: 65px;
+                  border-radius: 18px;
+                  cursor: pointer;
+                  transition: 0.3s ease;
+                  background: linear-gradient(
+                    to bottom right,
+                    var(--accent) 0%,
+                    rgba(79, 142, 247, 0) 30%
+                  );
+                  background-color: rgba(79, 142, 247, 0.2);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: none;
+                  padding: 0;
+                  font-family: inherit;
+                }
+                .user-profile:hover,
+                .user-profile:focus {
+                  background-color: rgba(79, 142, 247, 0.7);
+                  box-shadow: 0 0 12px rgba(79, 142, 247, 0.5);
+                  outline: none;
+                }
+                .user-profile-inner {
+                  width: 154px;
+                  height: 59px;
+                  border-radius: 15px;
+                  background-color: var(--card);
+                  color: var(--text);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 15px;
+                  font-weight: 700;
+                  font-size: 17px;
+                }
+                .user-profile-inner svg {
+                  width: 30px;
+                  height: 30px;
+                  fill: var(--text);
+                }
+                body[data-theme="light"] .user-profile-inner { background-color: #ffffff; }
+                body[data-theme="light"] .user-profile-inner svg { fill: #111827; }
+                body[data-theme="light"] .user-profile-inner p  { color: #111827; }
+
     /* TOAST */
     .toast {
       position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -848,11 +1070,11 @@
       <a href="#" class="logo">✓ <span>Just Do It</span></a>
     </div>
 
-    <div class="user-section">
-      <div class="user-avatar">G</div>
+    <div class="user-section" id="sidebarUserSection">
+          <div class="user-avatar" id="sidebarUserAvatar">G</div>
       <div class="user-info">
-        <h4>Guest User</h4>
-        <p>Stay organized</p>
+            <h4 id="sidebarUserName">Guest User</h4>
+            <p id="sidebarUserTagline">Stay organized</p>
       </div>
     </div>
 
@@ -932,11 +1154,7 @@
         <span class="count" id="headerCount">0</span>
       </div>
       <div class="header-actions">
-        <div class="user-chip" id="userChip" style="display:none;" title="">
-          <div class="user-chip-avatar" id="userChipAvatar">U</div>
-          <div class="user-chip-name" id="userChipName">User</div>
-        </div>
-        <button class="btn-add-task" onclick="openAddModal()" aria-label="Add task">
+              <button class="btn-add-task" onclick="openAddModal()" aria-label="Add task">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1.25rem"
@@ -950,7 +1168,7 @@
           >
             <path d="M12 19v-7m0 0V5m0 7H5m7 0h7"></path>
           </svg>
-          Add task to continue
+          Add task
         </button>
       </div>
     </header>
@@ -968,23 +1186,28 @@
       <button class="modal-close" onclick="closeModal()">×</button>
     </div>
     <div class="form-group">
-      <label>Task Title </label>
-      <input type="text" id="taskTitle" class="input" placeholder="Enter task title…" />
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea id="taskDesc" class="input" placeholder="Enter description…" rows="3"></textarea>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Due Date</label>
-        <input type="date" id="taskDueDate" />
-      </div>
-      <div class="form-group">
-        <label>Time</label>
-        <input type="time" id="taskTime" />
-      </div>
-    </div>
+              <div class="input-container">
+                <input type="text" id="taskTitle" class="neobrut-input" placeholder=" " autocomplete="off" />
+                <span class="input-label">Task</span>
+              </div>
+            </div>
+
+            <div class="form-group form-group-spaced">
+              <div class="input-container">
+                <textarea id="taskDesc" class="neobrut-input neobrut-textarea" placeholder=" " rows="3"></textarea>
+                <span class="input-label input-label-textarea">Description</span>
+              </div>
+            </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Due Date</label>
+            <input type="date" id="taskDueDate" />
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <input type="time" id="taskTime" />
+          </div>
+        </div>
     <div class="form-row">
       <div class="form-group">
         <label>Priority</label>
@@ -1005,8 +1228,11 @@
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn-submit" onclick="saveTask()">Save Task</button>
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+         <button class="Abutton">
+  <span class="Abutton-content">Add</span>
+</button>
+
+  
     </div>
   </div>
 </div>
@@ -1097,11 +1323,36 @@
       <div class="setting-item">
         <div class="setting-item-label">
           <div class="setting-item-title" id="accountEmailLabel">Signed in</div>
-          <div class="setting-item-desc">Click below to sign out of this account on this device.</div>
+              <div class="setting-item-desc" id="accountEmailDesc">Click below to sign out of this account on this device.</div>
         </div>
-        <button class="data-btn clear" onclick="signOut()">🚪 Sign Out</button>
-      </div>
-    </div>
+            <div class="logout-wrap" id="logoutWrap">
+              <button class="Btn" id="logoutBtn" onclick="signOut()" title="Sign out">
+                <div class="sign">
+                  <svg viewBox="0 0 512 512">
+                    <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                  </svg>
+                </div>
+                <div class="text">Logout</div>
+              </button>
+              <button
+                class="user-profile"
+                id="signInProfileBtn"
+                onclick="showAuth()"
+                title="Sign in or sign up"
+                aria-label="Sign In Button"
+              >
+                <div class="user-profile-inner">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g data-name="Layer 2" id="Layer_2">
+                      <path d="m15.626 11.769a6 6 0 1 0 -7.252 0 9.008 9.008 0 0 0 -5.374 8.231 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 9.008 9.008 0 0 0 -5.374-8.231zm-7.626-4.769a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm10 14h-12a1 1 0 0 1 -1-1 7 7 0 0 1 14 0 1 1 0 0 1 -1 1z"></path>
+                    </g>
+                  </svg>
+                  <p>Log In</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
 
     <div class="form-actions" style="margin-top:20px;">
       <button class="btn-cancel" style="flex:1;" onclick="closeSettings()">Close</button>
@@ -1114,31 +1365,50 @@
 
 <!-- AUTH SCREEN -->
 <div class="auth-screen" id="authScreen" style="display:none;">
-  <div class="auth-card">
-    <div class="auth-logo">
-      <div class="auth-logo-icon">✓</div>
-    </div>
-    <div class="auth-title">Just Do It</div>
-    <div class="auth-sub">Sign in to access your tasks</div>
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tabSignIn" onclick="switchAuthTab('signin')">Sign In</button>
-      <button class="auth-tab" id="tabSignUp" onclick="switchAuthTab('signup')">Sign Up</button>
-    </div>
-    <form id="authForm" onsubmit="return handleAuthSubmit(event)">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="authEmail" placeholder="you@example.com" required autocomplete="email" />
+  <div class="auth-stack">
+    <form class="form" id="authFormSignIn" onsubmit="return submitAuthFlip(event,'signin')">
+      <p class="form-title">Sign in to your account</p>
+      <div class="input-container">
+        <input type="text" name="username" id="authUsernameIn" placeholder="Enter username" required autocomplete="username" />
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="authPassword" placeholder="At least 6 characters" required minlength="6" autocomplete="current-password" />
+      <div class="input-container">
+        <input type="password" name="password" id="authPassIn" placeholder="Enter password" required minlength="6" autocomplete="current-password" />
       </div>
-      <div class="auth-error" id="authError"></div>
-      <button type="submit" class="btn-submit" id="authSubmitBtn" style="width:100%;">Sign In</button>
+      <div class="auth-error" id="authErrorSignIn"></div>
+      <button type="submit" class="form-submit">Sign in</button>
+      <p class="form-link-row">
+        No account?
+        <a onclick="setAuthMode('signup')">Sign up</a>
+      </p>
     </form>
-    <div class="auth-switch" id="authSwitch">
-      Don't have an account? <a onclick="switchAuthTab('signup')">Sign up</a>
-    </div>
+
+    <form class="form" id="authFormSignUp" onsubmit="return submitAuthFlip(event,'signup')" style="display:none;">
+      <p class="form-title">Create your account</p>
+      <div class="input-container">
+        <input type="text" name="name" id="authNameUp" placeholder="Enter name" autocomplete="name" />
+      </div>
+      <div class="input-container">
+        <input type="text" name="username" id="authUsernameUp" placeholder="Enter username" required autocomplete="username" />
+      </div>
+      <div class="input-container">
+        <input type="password" name="password" id="authPassUp" placeholder="Enter password" required minlength="6" autocomplete="new-password" />
+      </div>
+      <div class="auth-error" id="authErrorSignUp"></div>
+      <button type="submit" class="form-submit">Sign up</button>
+      <p class="form-link-row">
+        Already have an account?
+        <a onclick="setAuthMode('signin')">Sign in</a>
+      </p>
+    </form>
+
+    <button type="button" class="goback-btn" onclick="hideAuth()" style="margin-top: 4px;">
+      <span class="goback-arrow">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 7l-5 5 5 5V7z" fill="#0b0b0b"/>
+        </svg>
+      </span>
+      <span class="goback-text">Go Back</span>
+    </button>
   </div>
 </div>
 
@@ -1148,6 +1418,18 @@ const AUTH_USERS_KEY = 'jdi_users';
 const AUTH_SESSION_KEY = 'jdi_session';
 let currentUser = null;
 let authMode = 'signin';
+const GUEST_USER = {
+  id: 'guest',
+  email: 'guest',
+  isGuest: true,
+  createdAt: null
+};
+
+function ensureGuestSession() {
+  if (currentUser) return currentUser;
+  currentUser = { ...GUEST_USER };
+  return currentUser;
+}
 
 function loadUsers() {
   try { return JSON.parse(localStorage.getItem(AUTH_USERS_KEY)) || []; }
@@ -1177,11 +1459,12 @@ async function hashPassword(password, saltHex) {
   return { salt, hash };
 }
 
-async function signUp(email, password) {
+async function signUp(username, password) {
   const users = loadUsers();
-  const normalized = email.trim().toLowerCase();
+  const normalized = username.trim().toLowerCase();
+  if (!normalized) return { ok: false, error: 'Please enter a username.' };
   if (users.find(u => u.email === normalized)) {
-    return { ok: false, error: 'An account with this email already exists.' };
+    return { ok: false, error: 'That username is already taken.' };
   }
   const { salt, hash } = await hashPassword(password);
   const user = {
@@ -1196,11 +1479,12 @@ async function signUp(email, password) {
   return { ok: true, user };
 }
 
-async function signIn(email, password) {
+async function signIn(username, password) {
   const users = loadUsers();
-  const normalized = email.trim().toLowerCase();
+  const normalized = username.trim().toLowerCase();
+  if (!normalized) return { ok: false, error: 'Please enter a username.' };
   const user = users.find(u => u.email === normalized);
-  if (!user) return { ok: false, error: 'No account found with this email.' };
+  if (!user) return { ok: false, error: 'No account found with that username.' };
   const { hash } = await hashPassword(password, user.salt);
   if (hash !== user.hash) return { ok: false, error: 'Incorrect password.' };
   setSession(user);
@@ -1222,83 +1506,121 @@ function loadSession() {
 }
 
 function signOut() {
-  if (!confirm('Sign out of ' + (currentUser ? currentUser.email : 'this account') + '?')) return;
-  currentUser = null;
-  tasks = [];
-  settings = { showDescriptions: false };
+  if (!confirm('Sign out of ' + (currentUser && !currentUser.isGuest ? currentUser.email : 'this account') + '?')) return;
   localStorage.removeItem(AUTH_SESSION_KEY);
-  showAuth();
-  const chip = document.getElementById('userChip');
-  if (chip) chip.style.display = 'none';
-  showToast('👋 Signed out');
+  currentUser = { ...GUEST_USER };
+  loadUserData();
+  resetSidebarProfile();
+  renderUserChip();
+  showToast('👋 Signed out — continuing as Guest');
 }
 
 function showAuth() {
   const el = document.getElementById('authScreen');
   el.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  switchAuthTab(authMode);
+  const errIn = document.getElementById('authErrorSignIn');
+  const errUp = document.getElementById('authErrorSignUp');
+  if (errIn) errIn.textContent = '';
+  if (errUp) errUp.textContent = '';
+  setAuthMode(authMode);
+}
+
+function setAuthMode(mode) {
+  authMode = mode;
+  const inForm = document.getElementById('authFormSignIn');
+  const upForm = document.getElementById('authFormSignUp');
+  if (inForm) inForm.style.display = mode === 'signin' ? 'block' : 'none';
+  if (upForm) upForm.style.display = mode === 'signup' ? 'block' : 'none';
 }
 
 function hideAuth() {
   const el = document.getElementById('authScreen');
   el.style.display = 'none';
   document.body.style.overflow = '';
+  if (!currentUser || currentUser.isGuest) {
+    ensureGuestSession();
+    loadUserData();
+    renderUserChip();
+    showToast('👋 Continuing as Guest');
+  }
 }
 
-function switchAuthTab(mode) {
-  authMode = mode;
-  document.getElementById('tabSignIn').classList.toggle('active', mode === 'signin');
-  document.getElementById('tabSignUp').classList.toggle('active', mode === 'signup');
-  document.getElementById('authSubmitBtn').textContent = mode === 'signin' ? 'Sign In' : 'Create Account';
-  document.getElementById('authSwitch').innerHTML = mode === 'signin'
-    ? 'Don\'t have an account? <a onclick="switchAuthTab(\'signup\')">Sign up</a>'
-    : 'Already have an account? <a onclick="switchAuthTab(\'signin\')">Sign in</a>';
-  document.getElementById('authError').textContent = '';
-  const pass = document.getElementById('authPassword');
-  if (pass) pass.setAttribute('autocomplete', mode === 'signin' ? 'current-password' : 'new-password');
-}
-
-async function handleAuthSubmit(e) {
+async function submitAuthFlip(e, mode) {
   e.preventDefault();
-  const email = document.getElementById('authEmail').value;
-  const password = document.getElementById('authPassword').value;
-  const errEl = document.getElementById('authError');
-  errEl.textContent = '';
-  const btn = document.getElementById('authSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Please wait…';
-  const result = authMode === 'signin'
-    ? await signIn(email, password)
-    : await signUp(email, password);
-  btn.disabled = false; btn.textContent = authMode === 'signin' ? 'Sign In' : 'Create Account';
-  if (!result.ok) { errEl.textContent = result.error; return false; }
+  authMode = mode;
+  const username = document.getElementById(mode === 'signin' ? 'authUsernameIn' : 'authUsernameUp').value;
+  const password = document.getElementById(mode === 'signin' ? 'authPassIn'  : 'authPassUp').value;
+  const errEl    = document.getElementById(mode === 'signin' ? 'authErrorSignIn' : 'authErrorSignUp');
+  const allErrs  = document.querySelectorAll('#authScreen .auth-error');
+  allErrs.forEach(el => el.textContent = '');
+  const result = mode === 'signin'
+    ? await signIn(username, password)
+    : await signUp(username, password);
+  if (!result.ok) { if (errEl) errEl.textContent = result.error; return false; }
   onSignedIn(result.user);
   return false;
 }
 
 function onSignedIn(user) {
-  document.getElementById('authEmail').value = '';
-  document.getElementById('authPassword').value = '';
+  document.getElementById('authUsernameIn').value = '';
+  document.getElementById('authPassIn').value  = '';
+  document.getElementById('authUsernameUp').value = '';
+  document.getElementById('authPassUp').value  = '';
   loadUserData();
   renderUserChip();
   const accEl = document.getElementById('accountEmailLabel');
   if (accEl) accEl.textContent = 'Signed in as ' + user.email;
   hideAuth();
-  showToast('👋 Welcome' + (user.email ? ', ' + user.email.split('@')[0] : '') + '!');
+  showToast('👋 Welcome' + (user.email ? ', ' + user.email : '') + '!');
 }
 
 function renderUserChip() {
   const chip = document.getElementById('userChip');
-  if (!currentUser) { chip.style.display = 'none'; return; }
-  chip.style.display = 'flex';
-  const name = currentUser.email.split('@')[0];
-  document.getElementById('userChipName').textContent = name;
-  document.getElementById('userChipAvatar').textContent = name.charAt(0).toUpperCase();
-  chip.title = currentUser.email + ' — click to sign out';
-  chip.onclick = () => {
-    if (confirm('Sign out of ' + currentUser.email + '?')) signOut();
-  };
-  chip.style.cursor = 'pointer';
+  if (!currentUser) { if (chip) chip.style.display = 'none'; return; }
+  if (chip) { chip.style.display = 'flex'; chip.onclick = null; chip.style.cursor = 'default'; chip.title = ''; }
+
+  const sbAvatar  = document.getElementById('sidebarUserAvatar');
+  const sbName    = document.getElementById('sidebarUserName');
+  const sbTag     = document.getElementById('sidebarUserTagline');
+  const sbSection = document.getElementById('sidebarUserSection');
+
+  if (currentUser.isGuest) {
+    if (sbAvatar) sbAvatar.textContent = 'G';
+    if (sbName)   sbName.textContent   = 'Guest User';
+    if (sbTag)    sbTag.textContent    = 'Stay organized';
+    if (sbSection) {
+      sbSection.style.cursor = 'pointer';
+      sbSection.title = 'Click to sign in or create an account';
+      sbSection.onclick = () => showAuth();
+    }
+    return;
+  }
+
+  const name = currentUser.email;
+  if (sbAvatar) sbAvatar.textContent = name.charAt(0).toUpperCase();
+  if (sbName)   sbName.textContent   = name;
+  if (sbTag)    sbTag.textContent    = 'Signed in as ' + currentUser.email;
+  if (sbSection) {
+    sbSection.style.cursor = 'pointer';
+    sbSection.title = currentUser.email + ' — click to open settings';
+    sbSection.onclick = () => openSettings();
+  }
+}
+
+function resetSidebarProfile() {
+  const sbAvatar  = document.getElementById('sidebarUserAvatar');
+  const sbName    = document.getElementById('sidebarUserName');
+  const sbTag     = document.getElementById('sidebarUserTagline');
+  const sbSection = document.getElementById('sidebarUserSection');
+  if (sbAvatar) sbAvatar.textContent = 'G';
+  if (sbName)   sbName.textContent   = 'Guest User';
+  if (sbTag)    sbTag.textContent    = 'Stay organized';
+  if (sbSection) {
+    sbSection.style.cursor = 'pointer';
+    sbSection.title = 'Click to sign in or create an account';
+    sbSection.onclick = () => showAuth();
+  }
 }
 
 // ── STATE ──────────────────────────────────────────────────
@@ -1603,8 +1925,38 @@ function openSettings() {
       else el.className = 'toggle-switch' + (settings[key] ? ' on' : '');
     }
   });
-  document.getElementById('settingsModal').classList.add('active');
-}
+
+  const isGuest = !currentUser || currentUser.isGuest;
+  const accEl   = document.getElementById('accountEmailLabel');
+  const descEl  = document.getElementById('accountEmailDesc');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const signInBtn = document.getElementById('signInProfileBtn');
+    if (isGuest) {
+      if (accEl)  accEl.textContent  = 'Browsing as Guest';
+      if (descEl) descEl.textContent = 'Your tasks are saved locally on this device. Sign in to sync across devices.';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+      if (signInBtn) signInBtn.style.display = '';
+      if (logoutBtn) {
+        logoutBtn.title = 'Sign in / Sign up';
+        logoutBtn.onclick = () => showAuth();
+        const label = logoutBtn.querySelector('.text');
+        if (label) label.textContent = 'Sign In';
+      }
+    } else {
+      if (accEl)  accEl.textContent  = 'Signed in as ' + currentUser.email;
+      if (descEl) descEl.textContent = 'Click below to sign out of this account on this device.';
+      if (logoutBtn) logoutBtn.style.display = '';
+      if (signInBtn) signInBtn.style.display = 'none';
+      if (logoutBtn) {
+        logoutBtn.title = 'Sign out';
+        logoutBtn.onclick = () => signOut();
+        const label = logoutBtn.querySelector('.text');
+        if (label) label.textContent = 'Logout';
+      }
+    }
+
+    document.getElementById('settingsModal').classList.add('active');
+  }
 
 function closeSettings() {
   document.getElementById('settingsModal').classList.remove('active');
@@ -1763,14 +2115,14 @@ document.querySelectorAll('.modal').forEach(m => {
 // ── INIT ────────────────────────────────────────────────────
 (function init() {
   currentUser = loadSession();
-  if (currentUser) {
-    loadUserData();
-    renderUserChip();
+  if (!currentUser) {
+    currentUser = { ...GUEST_USER };
+  }
+  loadUserData();
+  renderUserChip();
+  if (!currentUser.isGuest) {
     const accEl = document.getElementById('accountEmailLabel');
     if (accEl) accEl.textContent = 'Signed in as ' + currentUser.email;
-    hideAuth();
-  } else {
-    showAuth();
   }
 })();
 </script>
